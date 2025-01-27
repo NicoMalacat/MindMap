@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mental Health App</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #001f3f; /* Navy Blue */
+      color: white;
+      text-align: center;
+    }
+    h1, h2 {
+      color: #FFDD44; /* Light Yellow */
+    }
+    .container {
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 800px;
+      background-color: #004080; /* Medium Blue */
+      border-radius: 8px;
+    }
+    .button {
+      background-color: #FFDD44; /* Light Yellow */
+      color: #001f3f;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #FFC107; /* Darker Yellow */
+    }
+    .hidden {
+      display: none;
+    }
+    .question {
+      text-align: left;
+      margin: 15px 0;
+    }
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+    textarea {
+      width: 100%;
+      height: 400px; /* Increased size for better user experience */
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background-color: #f1f1f1;
+      color: #333;
+    }
+    #seekHelp a {
+      color: white; /* Make links white for better visibility */
+      text-decoration: none;
+    }
+    #seekHelp a:hover {
+      text-decoration: underline;
+    }
+    .logo {
+      width: 200px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Home -->
+  <div id="home" class="container">
+    <img src="https://i.imgur.com/0K6cag7.png" class="logo" alt="MindMap Logo">
+    <h1>Welcome to MindMap</h1>
+    <h2>Your Mental Health Companion</h2>
+    <button class="button" onclick="navigateTo('disclaimer')">How Well Do You Know Yourself?</button>
+    <button class="button" onclick="navigateTo('therapyNotes')">Therapy Notes</button>
+    <button class="button" onclick="navigateTo('seekHelp')">Seek Help</button>
+    <p>
+      Researchers:<br>
+      Nico Lorenzo Malacat, Chacelmar Lastimoso, Jeiseca Mae Acaylar,<br>
+      Keyle Jamarolin, Marianne J Mahinay, Kent Russel Castillo, Ellia Debangco
+    </p>
+    <img src="https://i.imgur.com/WklofWT.png" alt="Dapitan City National High School Logo" class="logo">
+  </div>
+
+  <!-- Disclaimer -->
+  <div id="disclaimer" class="container hidden">
+    <h2>Disclaimer</h2>
+    <p>
+      The quiz is not a clinical diagnosis but a tool to help you reflect on your mental well-being. For professional help, please consult a licensed counselor or therapist.
+    </p>
+    <button class="button" onclick="navigateTo('quizPage')">Agree</button>
+    <button class="button" onclick="navigateTo('home')">Disagree</button>
+  </div>
+
+  <!-- Quiz Page -->
+  <div id="quizPage" class="container hidden">
+    <h2>How Well Do You Know Yourself?</h2>
+    <form id="quizForm">
+      <!-- Question 1 -->
+      <div class="question">
+        <p>1. I often feel nervous or on edge.</p>
+        <input type="radio" name="q1" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q1" value="2"> Disagree<br>
+        <input type="radio" name="q1" value="3"> Neutral<br>
+        <input type="radio" name="q1" value="4"> Agree<br>
+        <input type="radio" name="q1" value="5"> Strongly Agree<br>
+      </div>
+      <!-- Question 2 -->
+      <div class="question">
+        <p>2. I have trouble sleeping due to worrying thoughts.</p>
+        <input type="radio" name="q2" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q2" value="2"> Disagree<br>
+        <input type="radio" name="q2" value="3"> Neutral<br>
+        <input type="radio" name="q2" value="4"> Agree<br>
+        <input type="radio" name="q2" value="5"> Strongly Agree<br>
+      </div>
+      <!-- Question 3 -->
+      <div class="question">
+        <p>3. I feel sad or down most of the time.</p>
+        <input type="radio" name="q3" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q3" value="2"> Disagree<br>
+        <input type="radio" name="q3" value="3"> Neutral<br>
+        <input type="radio" name="q3" value="4"> Agree<br>
+        <input type="radio" name="q3" value="5"> Strongly Agree<br>
+      </div>
+      <!-- Question 4 -->
+      <div class="question">
+        <p>4. I struggle to focus or concentrate on tasks.</p>
+        <input type="radio" name="q4" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q4" value="2"> Disagree<br>
+        <input type="radio" name="q4" value="3"> Neutral<br>
+        <input type="radio" name="q4" value="4"> Agree<br>
+        <input type="radio" name="q4" value="5"> Strongly Agree<br>
+      </div>
+      <!-- Question 5 -->
+      <div class="question">
+        <p>5. I avoid social situations because I feel anxious.</p>
+        <input type="radio" name="q5" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q5" value="2"> Disagree<br>
+        <input type="radio" name="q5" value="3"> Neutral<br>
+        <input type="radio" name="q5" value="4"> Agree<br>
+        <input type="radio" name="q5" value="5"> Strongly Agree<br>
+      </div>
+      <!-- Question 6 -->
+      <div class="question">
+        <p>6. I feel overwhelmed by responsibilities.</p>
+        <input type="radio" name="q6" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q6" value="2"> Disagree<br>
+        <input type="radio" name="q6" value="3"> Neutral<br>
+        <input type="radio" name="q6" value="4"> Agree<br>
+        <input type="radio" name="q6" value="5"> Strongly Agree<br>
+      </div>
+      <!-- Question 7 -->
+      <div class="question">
+        <p>7. I often feel worthless or like a failure.</p>
+        <input type="radio" name="q7" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q7" value="2"> Disagree<br>
+        <input type="radio" name="q7" value="3"> Neutral<br>
+        <input type="radio" name="q7" value="4"> Agree<br>
+        <input type="radio" name="q7" value="5"> Strongly Agree<br>
+      </div>
+      <!-- Question 8 -->
+      <div class="question">
+        <p>8. I feel like I can't trust others easily.</p>
+        <input type="radio" name="q8" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q8" value="2"> Disagree<br>
+        <input type="radio" name="q8" value="3"> Neutral<br>
+        <input type="radio" name="q8" value="4"> Agree<br>
+        <input type="radio" name="q8" value="5"> Strongly Agree<br>
+      </div>
+      <!-- Question 9 -->
+      <div class="question">
+        <p>9. I have frequent mood swings.</p>
+        <input type="radio" name="q9" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q9" value="2"> Disagree<br>
+        <input type="radio" name="q9" value="3"> Neutral<br>
+        <input type="radio" name="q9" value="4"> Agree<br>
+        <input type="radio" name="q9" value="5"> Strongly Agree<br>
+      </div>
+      <!-- Question 10 -->
+      <div class="question">
+        <p>10. I feel like I have no purpose in life.</p>
+        <input type="radio" name="q10" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q10" value="2"> Disagree<br>
+        <input type="radio" name="q10" value="3"> Neutral<br>
+        <input type="radio" name="q10" value="4"> Agree<br>
+        <input type="radio" name="q10" value="5"> Strongly Agree<br>
+      </div>
+    </form>
+    <button class="button" onclick="evaluateQuiz()">Evaluate</button>
+  </div>
+
+  <!-- Evaluation Page -->
+  <div id="evaluationPage" class="container hidden">
+    <h2>Results</h2>
+    <p>Your score: <span id="score"></span></p>
+    <p id="suggestion"></p>
+    <button class="button" onclick="navigateTo('home')">Go Home</button>
+  </div>
+
+  <!-- Therapy Notes -->
+  <div id="therapyNotes" class="container hidden">
+    <h2>Therapy Notes</h2>
+    <textarea id="notes" placeholder="Write your reflections here..."></textarea><br>
+    <button class="button" onclick="navigateTo('home')">Go Home</button>
+  </div>
+
+  <!-- Seek Help -->
+  <div id="seekHelp" class="container hidden">
+    <h2>Seek Help</h2>
+    <p>If you're feeling overwhelmed or need someone to talk to, please reach out to the following resources:</p>
+    <p>National Suicide Prevention Hotline: <a href="tel:1-800-273-8255" id="hotline1">1-800-273-8255</a></p>
+    <p>Text HELLO to 741741 (Crisis Text Line)</p>
+    <p>Local Helpline: <a href="tel:1553" id="hotline2">1553</a></p>
+    <button class="button" onclick="navigateTo('home')">Go Home</button>
+  </div>
+
+  <script>
+    let currentPage = "home";
+    const pages = ["home", "disclaimer", "quizPage", "evaluationPage", "therapyNotes", "seekHelp"];
+
+    function navigateTo(page) {
+      document.getElementById(currentPage).classList.add("hidden");
+      currentPage = page;
+      document.getElementById(currentPage).classList.remove("hidden");
+    }
+
+    function evaluateQuiz() {
+      let score = 0;
+      for (let i = 1; i <= 10; i++) {
+        const answers = document.getElementsByName(`q${i}`);
+        for (let answer of answers) {
+          if (answer.checked) {
+            score += parseInt(answer.value);
+            break;
+          }
+        }
+      }
+      document.getElementById("score").textContent = score;
+
+      let suggestion = "";
+      if (score <= 20) {
+        suggestion = "You're feeling emotionally well, but it's important to continue nurturing your mental health. Your mental health seems to be in a good place, and that’s truly wonderful. Keep nurturing what brings you joy and balance, whether it’s your hobbies, relationships, or small moments of gratitude. Staying connected to others and caring for your body will continue to support your well-being. You’re doing great—keep going!";
+      } else if (score <= 30) {
+        suggestion = "It’s okay if things feel a little off sometimes. Life can be overwhelming, but small steps like mindfulness, reaching out for support, or setting simple goals can help. You don’t have to go through this alone, and even small changes can make a big difference. Be kind to yourself—you’re doing the best you can. Consider talking to someone you trust or seeking professional help.";
+      } else {
+        suggestion = "It seems like you're experiencing significant emotional distress. It sounds like you’re going through a tough time, and that’s okay. Reaching out for support shows strength, and you don’t have to face this alone. Healing takes time, so be patient with yourself. Surround yourself with those who care and remember that asking for help is a brave step toward feeling better. You're not alone in this journey. Always remember, you are loved, valued, and cherished by your loved ones. It's crucial to reach out for support.";
+      }
+      document.getElementById("suggestion").textContent = suggestion;
+
+      navigateTo("evaluationPage");
+    }
+  </script>
+</body>
+</html>
