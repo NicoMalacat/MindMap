@@ -3,256 +3,263 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mental Health App</title>
+  <title>MindMap Games</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #001f3f; /* Navy Blue */
+      margin: 0;
+      padding: 0;
+      background-color: #002f6c;
       color: white;
       text-align: center;
     }
-    h1, h2 {
-      color: #FFDD44; /* Light Yellow */
-    }
     .container {
-      margin: 20px auto;
       padding: 20px;
-      max-width: 800px;
-      background-color: #004080; /* Medium Blue */
-      border-radius: 8px;
+      max-width: 600px;
+      margin: 50px auto;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
     }
     .button {
-      background-color: #FFDD44; /* Light Yellow */
-      color: #001f3f;
+      background-color: #FFD700;
+      color: black;
+      padding: 15px 25px;
+      margin: 20px 10px;
       border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      margin: 10px;
-      border-radius: 4px;
       cursor: pointer;
+      border-radius: 10px;
+      font-size: 18px;
     }
     .button:hover {
-      background-color: #FFC107; /* Darker Yellow */
+      background-color: #ffcc00;
     }
-    .hidden {
-      display: none;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 5px;
+      margin-bottom: 20px;
+    }
+    .cell {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 36px;
+      border: 2px solid #FFD700;
+      background-color: #003b72;
+      cursor: pointer;
+    }
+    .cell:active {
+      background-color: #FFD700;
     }
     .question {
-      text-align: left;
       margin: 15px 0;
-    }
-    input[type="radio"] {
-      margin-right: 8px;
-    }
-    textarea {
-      width: 100%;
-      height: 400px; /* Increased size for better user experience */
-      font-size: 16px;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      background-color: #f1f1f1;
-      color: #333;
-    }
-    #seekHelp a {
-      color: white; /* Make links white for better visibility */
-      text-decoration: none;
-    }
-    #seekHelp a:hover {
-      text-decoration: underline;
-    }
-    .logo {
-      width: 200px;
-      margin-bottom: 20px;
+      font-size: 20px;
     }
   </style>
 </head>
 <body>
-  <!-- Home -->
-  <div id="home" class="container">
-    <img src="https://i.imgur.com/0K6cag7.png" class="logo" alt="MindMap Logo">
-    <h1>Welcome to MindMap</h1>
-    <h2>Your Mental Health Companion</h2>
-    <button class="button" onclick="navigateTo('disclaimer')">How Well Do You Know Yourself?</button>
-    <button class="button" onclick="navigateTo('therapyNotes')">Therapy Notes</button>
-    <button class="button" onclick="navigateTo('seekHelp')">Seek Help</button>
-    <p>
-      Researchers:<br>
-      Nico Lorenzo Malacat, Chacelmar Lastimoso, Jeiseca Mae Acaylar,<br>
-      Keyle Jamarolin, Marianne J Mahinay, Kent Russel Castillo, Ellia Debangco
-    </p>
-    <img src="https://i.imgur.com/WklofWT.png" alt="Dapitan City National High School Logo" class="logo">
+
+  <!-- MindMap Games Home Page -->
+  <div class="container" id="homeScreen">
+    <h1>Welcome to MindMap Games</h1>
+    <img src="https://i.imgur.com/0K6cag7.png" alt="MindMap Logo">
+    <div>
+      <button class="button" onclick="startTikTakToe()">TikTakToe</button>
+      <button class="button" onclick="startWouldYouRather()">Would You Rather?</button>
+    </div>
   </div>
 
-  <!-- Disclaimer -->
-  <div id="disclaimer" class="container hidden">
-    <h2>Disclaimer</h2>
-    <p>
-      The quiz is not a clinical diagnosis but a tool to help you reflect on your mental well-being. For professional help, please consult a licensed counselor or therapist.
-    </p>
-    <button class="button" onclick="navigateTo('quizPage')">Agree</button>
-    <button class="button" onclick="navigateTo('home')">Disagree</button>
+  <!-- TikTakToe Game -->
+  <div class="container" id="tikTakToe" style="display: none;">
+    <h1>TikTakToe: Play with Friends!</h1>
+    <div id="gameStatus"></div>
+    <div class="grid" id="grid"></div>
+    <div>
+      <button class="button" onclick="resetGame()">Try Again</button>
+      <button class="button" onclick="goBackHome()">Back to Home</button>
+    </div>
   </div>
 
-  <!-- Quiz Page -->
-  <div id="quizPage" class="container hidden">
-    <h2>How Well Do You Know Yourself?</h2>
+  <!-- Would You Rather? Game -->
+  <div class="container" id="wouldYouRather" style="display: none;">
+    <h1>Would You Rather?</h1>
     <form id="quizForm">
-      <!-- Question 1 -->
       <div class="question">
-        <p>1. I often feel nervous or on edge.</p>
-        <input type="radio" name="q1" value="1"> Strongly Disagree<br>
-        <input type="radio" name="q1" value="2"> Disagree<br>
-        <input type="radio" name="q1" value="3"> Neutral<br>
-        <input type="radio" name="q1" value="4"> Agree<br>
-        <input type="radio" name="q1" value="5"> Strongly Agree<br>
+        <p>1. Would you rather spend your day solving math problems or painting?</p>
+        <input type="radio" name="q1" value="left"> Solving math problems<br>
+        <input type="radio" name="q1" value="right"> Painting<br>
       </div>
-      <!-- Question 2 -->
       <div class="question">
-        <p>2. I have trouble sleeping due to worrying thoughts.</p>
-        <input type="radio" name="q2" value="1"> Strongly Disagree<br>
-        <input type="radio" name="q2" value="2"> Disagree<br>
-        <input type="radio" name="q2" value="3"> Neutral<br>
-        <input type="radio" name="q2" value="4"> Agree<br>
-        <input type="radio" name="q2" value="5"> Strongly Agree<br>
+        <p>2. Would you rather read a book or watch a movie?</p>
+        <input type="radio" name="q2" value="left"> Read a book<br>
+        <input type="radio" name="q2" value="right"> Watch a movie<br>
       </div>
-      <!-- Question 3 -->
       <div class="question">
-        <p>3. I feel sad or down most of the time.</p>
-        <input type="radio" name="q3" value="1"> Strongly Disagree<br>
-        <input type="radio" name="q3" value="2"> Disagree<br>
-        <input type="radio" name="q3" value="3"> Neutral<br>
-        <input type="radio" name="q3" value="4"> Agree<br>
-        <input type="radio" name="q3" value="5"> Strongly Agree<br>
+        <p>3. Would you rather take a logical approach or a creative approach to problem-solving?</p>
+        <input type="radio" name="q3" value="left"> Logical approach<br>
+        <input type="radio" name="q3" value="right"> Creative approach<br>
       </div>
-      <!-- Question 4 -->
       <div class="question">
-        <p>4. I struggle to focus or concentrate on tasks.</p>
-        <input type="radio" name="q4" value="1"> Strongly Disagree<br>
-        <input type="radio" name="q4" value="2"> Disagree<br>
-        <input type="radio" name="q4" value="3"> Neutral<br>
-        <input type="radio" name="q4" value="4"> Agree<br>
-        <input type="radio" name="q4" value="5"> Strongly Agree<br>
+        <p>4. Would you rather be involved in music or mathematics?</p>
+        <input type="radio" name="q4" value="right"> Music<br>
+        <input type="radio" name="q4" value="left"> Mathematics<br>
       </div>
-      <!-- Question 5 -->
       <div class="question">
-        <p>5. I avoid social situations because I feel anxious.</p>
-        <input type="radio" name="q5" value="1"> Strongly Disagree<br>
-        <input type="radio" name="q5" value="2"> Disagree<br>
-        <input type="radio" name="q5" value="3"> Neutral<br>
-        <input type="radio" name="q5" value="4"> Agree<br>
-        <input type="radio" name="q5" value="5"> Strongly Agree<br>
+        <p>5. Would you rather work in a structured environment or a flexible one?</p>
+        <input type="radio" name="q5" value="left"> Structured<br>
+        <input type="radio" name="q5" value="right"> Flexible<br>
       </div>
-      <!-- Question 6 -->
       <div class="question">
-        <p>6. I feel overwhelmed by responsibilities.</p>
-        <input type="radio" name="q6" value="1"> Strongly Disagree<br>
-        <input type="radio" name="q6" value="2"> Disagree<br>
-        <input type="radio" name="q6" value="3"> Neutral<br>
-        <input type="radio" name="q6" value="4"> Agree<br>
-        <input type="radio" name="q6" value="5"> Strongly Agree<br>
+        <p>6. Would you rather think with facts or imagination?</p>
+        <input type="radio" name="q6" value="left"> Facts<br>
+        <input type="radio" name="q6" value="right"> Imagination<br>
       </div>
-      <!-- Question 7 -->
       <div class="question">
-        <p>7. I often feel worthless or like a failure.</p>
-        <input type="radio" name="q7" value="1"> Strongly Disagree<br>
-        <input type="radio" name="q7" value="2"> Disagree<br>
-        <input type="radio" name="q7" value="3"> Neutral<br>
-        <input type="radio" name="q7" value="4"> Agree<br>
-        <input type="radio" name="q7" value="5"> Strongly Agree<br>
+        <p>7. Would you rather be a scientist or an artist?</p>
+        <input type="radio" name="q7" value="left"> Scientist<br>
+        <input type="radio" name="q7" value="right"> Artist<br>
       </div>
-      <!-- Question 8 -->
       <div class="question">
-        <p>8. I feel like I can't trust others easily.</p>
-        <input type="radio" name="q8" value="1"> Strongly Disagree<br>
-        <input type="radio" name="q8" value="2"> Disagree<br>
-        <input type="radio" name="q8" value="3"> Neutral<br>
-        <input type="radio" name="q8" value="4"> Agree<br>
-        <input type="radio" name="q8" value="5"> Strongly Agree<br>
+        <p>8. Would you rather focus on details or the big picture?</p>
+        <input type="radio" name="q8" value="left"> Details<br>
+        <input type="radio" name="q8" value="right"> Big picture<br>
       </div>
-      <!-- Question 9 -->
       <div class="question">
-        <p>9. I have frequent mood swings.</p>
-        <input type="radio" name="q9" value="1"> Strongly Disagree<br>
-        <input type="radio" name="q9" value="2"> Disagree<br>
-        <input type="radio" name="q9" value="3"> Neutral<br>
-        <input type="radio" name="q9" value="4"> Agree<br>
-        <input type="radio" name="q9" value="5"> Strongly Agree<br>
+        <p>9. Would you rather be good at languages or solving puzzles?</p>
+        <input type="radio" name="q9" value="left"> Solving puzzles<br>
+        <input type="radio" name="q9" value="right"> Languages<br>
       </div>
-      <!-- Question 10 -->
       <div class="question">
-        <p>10. I feel like I have no purpose in life.</p>
-        <input type="radio" name="q10" value="1"> Strongly Disagree<br>
-        <input type="radio" name="q10" value="2"> Disagree<br>
-        <input type="radio" name="q10" value="3"> Neutral<br>
-        <input type="radio" name="q10" value="4"> Agree<br>
-        <input type="radio" name="q10" value="5"> Strongly Agree<br>
+        <p>10. Would you rather work with numbers or creative design?</p>
+        <input type="radio" name="q10" value="left"> Numbers<br>
+        <input type="radio" name="q10" value="right"> Creative design<br>
       </div>
+      <button type="submit" class="button">Submit</button>
     </form>
-    <button class="button" onclick="evaluateQuiz()">Evaluate</button>
-  </div>
-
-  <!-- Evaluation Page -->
-  <div id="evaluationPage" class="container hidden">
-    <h2>Results</h2>
-    <p>Your score: <span id="score"></span></p>
-    <p id="suggestion"></p>
-    <button class="button" onclick="navigateTo('home')">Go Home</button>
-  </div>
-
-  <!-- Therapy Notes -->
-  <div id="therapyNotes" class="container hidden">
-    <h2>Therapy Notes</h2>
-    <textarea id="notes" placeholder="Write your reflections here..."></textarea><br>
-    <button class="button" onclick="navigateTo('home')">Go Home</button>
-  </div>
-
-  <!-- Seek Help -->
-  <div id="seekHelp" class="container hidden">
-    <h2>Seek Help</h2>
-    <p>If you're feeling overwhelmed or need someone to talk to, please reach out to the following resources:</p>
-    <p>National Suicide Prevention Hotline: <a href="tel:1-800-273-8255" id="hotline1">1-800-273-8255</a></p>
-    <p>Text HELLO to 741741 (Crisis Text Line)</p>
-    <p>Local Helpline: <a href="tel:1553" id="hotline2">1553</a></p>
-    <button class="button" onclick="navigateTo('home')">Go Home</button>
+    <div id="result" style="margin-top: 20px;"></div>
+    <button class="button" onclick="goBackHome()">Back to Home</button>
+    <button class="button" onclick="window.location.reload()">Try Again</button>
   </div>
 
   <script>
-    let currentPage = "home";
-    const pages = ["home", "disclaimer", "quizPage", "evaluationPage", "therapyNotes", "seekHelp"];
-
-    function navigateTo(page) {
-      document.getElementById(currentPage).classList.add("hidden");
-      currentPage = page;
-      document.getElementById(currentPage).classList.remove("hidden");
+    // MindMap Games Homepage
+    function startTikTakToe() {
+      document.getElementById('homeScreen').style.display = 'none';
+      document.getElementById('tikTakToe').style.display = 'block';
+      initializeGame();
     }
 
-    function evaluateQuiz() {
-      let score = 0;
-      for (let i = 1; i <= 10; i++) {
-        const answers = document.getElementsByName(`q${i}`);
-        for (let answer of answers) {
-          if (answer.checked) {
-            score += parseInt(answer.value);
-            break;
-          }
+    function startWouldYouRather() {
+      document.getElementById('homeScreen').style.display = 'none';
+      document.getElementById('wouldYouRather').style.display = 'block';
+    }
+
+    function goBackHome() {
+      document.getElementById('tikTakToe').style.display = 'none';
+      document.getElementById('wouldYouRather').style.display = 'none';
+      document.getElementById('homeScreen').style.display = 'block';
+    }
+
+    // TikTakToe Game Logic
+    let currentPlayer = 'X';
+    let gameBoard = ['', '', '', '', '', '', '', '', ''];
+    const grid = document.getElementById('grid');
+    const gameStatus = document.getElementById('gameStatus');
+
+    function initializeGame() {
+      grid.innerHTML = '';
+      gameBoard = ['', '', '', '', '', '', '', '', ''];
+      currentPlayer = 'X';
+      gameStatus.innerHTML = 'Player X\'s turn';
+      for (let i = 0; i < 9; i++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.dataset.index = i;
+        cell.addEventListener('click', handleCellClick);
+        grid.appendChild(cell);
+      }
+    }
+
+    function handleCellClick(event) {
+      const index = event.target.dataset.index;
+      if (gameBoard[index] === '') {
+        gameBoard[index] = currentPlayer;
+        event.target.textContent = currentPlayer;
+        if (checkWinner()) {
+          gameStatus.innerHTML = `${currentPlayer} wins!`;
+          setTimeout(() => {
+            alert(`${currentPlayer} wins! Congratulations! You've done a fantastic job! 🎉`);
+            resetGame();
+          }, 500);
+        } else if (gameBoard.every(cell => cell !== '')) {
+          gameStatus.innerHTML = 'It\'s a tie!';
+          setTimeout(() => {
+            alert('It\'s a tie! You both played great, well done!');
+            resetGame();
+          }, 500);
+        } else {
+          currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+          gameStatus.innerHTML = `Player ${currentPlayer}'s turn`;
         }
       }
-      document.getElementById("score").textContent = score;
-
-      let suggestion = "";
-      if (score <= 20) {
-        suggestion = "You're feeling emotionally well, but it's important to continue nurturing your mental health. Your mental health seems to be in a good place, and that’s truly wonderful. Keep nurturing what brings you joy and balance, whether it’s your hobbies, relationships, or small moments of gratitude. Staying connected to others and caring for your body will continue to support your well-being. You’re doing great—keep going!";
-      } else if (score <= 30) {
-        suggestion = "It’s okay if things feel a little off sometimes. Life can be overwhelming, but small steps like mindfulness, reaching out for support, or setting simple goals can help. You don’t have to go through this alone, and even small changes can make a big difference. Be kind to yourself—you’re doing the best you can. Consider talking to someone you trust or seeking professional help.";
-      } else {
-        suggestion = "It seems like you're experiencing significant emotional distress. It sounds like you’re going through a tough time, and that’s okay. Reaching out for support shows strength, and you don’t have to face this alone. Healing takes time, so be patient with yourself. Surround yourself with those who care and remember that asking for help is a brave step toward feeling better. You're not alone in this journey. Always remember, you are loved, valued, and cherished by your loved ones. It's crucial to reach out for support.";
-      }
-      document.getElementById("suggestion").textContent = suggestion;
-
-      navigateTo("evaluationPage");
     }
+
+    function checkWinner() {
+      const winPatterns = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+      ];
+      return winPatterns.some(pattern => {
+        const [a, b, c] = pattern;
+        return gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c];
+      });
+    }
+
+    function resetGame() {
+      initializeGame();
+    }
+
+    // Would You Rather? Logic
+    document.getElementById('quizForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      let leftBrainCount = 0;
+      let rightBrainCount = 0;
+
+      for (let i = 1; i <= 10; i++) {
+        const answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer) {
+          if (answer.value === 'left') leftBrainCount++;
+          if (answer.value === 'right') rightBrainCount++;
+        }
+      }
+
+      let brainType = '';
+      let message = '';
+
+      if (leftBrainCount > rightBrainCount) {
+        brainType = 'left-brained';
+        message = "You have a logical, structured mind! You're great with numbers and enjoy methodical tasks. Keep up the great work with your detailed, analytical thinking!";
+      } else if (rightBrainCount > leftBrainCount) {
+        brainType = 'right-brained';
+        message = "You have a creative, artistic mind! You think outside the box and excel at innovative and artistic tasks. Continue to nurture that creative spirit!";
+      } else {
+        brainType = 'balanced';
+        message = "You have a fantastic balance of creativity and logic! Keep applying your versatile abilities in whatever you do!";
+      }
+
+      document.getElementById('result').innerHTML = `You are ${brainType}! ${message}`;
+    });
   </script>
 </body>
 </html>
